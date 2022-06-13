@@ -17,11 +17,11 @@ jobs:
         if: github.event.comment.body == 'auto_merge'
         run: |
           echo A comment on PR "${{ github.event.comment.body }}"
-     - name: automerge
-       uses: "pascalgn/automerge-action@v0.15.3"
-       env:
-         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"  
-     - name: feedback
-       if: steps.automerge.outputs.mergeResult == "merged"
-       run: |
-         echo "Pull request ${{ steps.automerge.outputs.pullRequestNumber }} merged!"
+      - name: automerge
+        uses: "pascalgn/automerge-action@v0.15.3"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"  
+      - name: feedback
+        if: steps.automerge.outputs.mergeResult == "merged"
+        run: |
+          echo "Pull request ${{ steps.automerge.outputs.pullRequestNumber }} merged!"
