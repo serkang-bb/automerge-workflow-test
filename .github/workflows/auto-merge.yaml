@@ -15,6 +15,6 @@ jobs:
     steps:
       - name: Check Comment for Action
         if: github.event.comment.body == 'auto_merge'
-        uses: "pascalgn/automerge-action@v0.15.3"
-        env:
-          GITHUB_TOKEN: "${{ secrets.BAAS_BOT_PAT }}"
+        uses: "ridedott/merge-me-action@v2"
+        with:
+          GITHUB_TOKEN: ${{ secrets.BAAS_BOT_PAT }}
