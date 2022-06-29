@@ -20,5 +20,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.BAAS_BOT_PAT }}
         with:
           merge-method: 'squash' # Default 'squash'
-          min-approvals: 0 # Default 2
-          base-ref: ${{ github.event.pull_request.head.ref }} # Default 'dev'          
+          min-approvals: 0 # Default 2       
