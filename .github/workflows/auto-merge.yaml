@@ -21,4 +21,4 @@ jobs:
         with:
           merge-method: 'squash' # Default 'squash'
           min-approvals: 0 # Default 2
-          base-ref: 'test-comment-1' # Default 'dev'          
+          base-ref: ${{ github.event.pull_request.head.ref }} # Default 'dev'          
