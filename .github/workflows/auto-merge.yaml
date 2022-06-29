@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Check Comment for Action
         if: github.event.comment.body == 'auto_merge'
-        uses: ridedott/merge-me-action@v2
+        uses: everlytic/branch-merge@1.1.2
         with:
-          GITHUB_TOKEN: ${{ secrets.BAAS_BOT_PAT }}
+          github_token: ${{ secrets.BAAS_BOT_PAT }}
+          source_ref: ${{ github.ref }}
+          target_branch: 'master'
