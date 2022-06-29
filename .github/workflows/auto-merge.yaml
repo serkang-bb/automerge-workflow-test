@@ -15,8 +15,8 @@ jobs:
     steps:
       - name: Check Comment for Action
         if: github.event.comment.body == 'auto_merge'
-        uses: "Goobles/gh-actions-merge-command@v1"
+        uses: "devmasx/merge-branch@master"
         with:
-          allow_ff: false
-        env:
+          type: now
+          target_branch: main        
           GITHUB_TOKEN: ${{ secrets.BAAS_BOT_PAT }}
