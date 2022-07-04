@@ -13,13 +13,11 @@ jobs:
     if: ${{ github.event.issue.pull_request }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-
+      - name: resolve pr refs
+       id: refs
+       uses: eficode/resolve-pr-refs@main
+       with:
+         token: ${{ secrets.BAAS_BOT_PAT }}
       - name: Check Comment for Action
         if: github.event.comment.body == 'auto_merge'
-        uses: devmasx/merge-branch@master
-        with:
-          type: now
-          head_to_merge: comment-test
-          target_branch: main
-          github_token: ${{ secrets.BAAS_BOT_PAT }}
+        run : echo Branch Name : ${{ steps.refs.outputs.head_ref }}
