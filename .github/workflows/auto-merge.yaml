@@ -18,6 +18,4 @@ jobs:
        uses: eficode/resolve-pr-refs@main
        with:
          token: ${{ secrets.BAAS_BOT_PAT }}
-      - name: Check Comment for Action
-        if: github.event.comment.body == 'auto_merge'
-        run : echo Branch Name : ${{ steps.refs.outputs.head_ref }}
+
