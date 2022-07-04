@@ -25,4 +25,3 @@ jobs:
           source_ref: ${{ steps.refs.outputs.head_ref }}
           target_branch: ${{ steps.refs.outputs.base_ref }}
           commit_message_template: '[Automated] Merged {source_ref} into target {target_branch}'
-        run : echo 'Branch Name - ${{ steps.refs.outputs.head_ref }} - ${{ steps.refs.outputs.base_ref }}'
