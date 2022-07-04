@@ -3,20 +3,25 @@ name: PR Comment for Auto Merge
 on:
   issue_comment:
     branches:
-      - main
+      - 'release/*'
     paths-ignore:
       - '.github/**'
 
 jobs:
   pr_commented:
     name: PR comment
-    if: ${{ github.event.issue.pull_request }}
+    if: ${{ github.event.issue.pull_request && github.event.comment.body == 'auto_merge' }}
     runs-on: ubuntu-latest
     steps:
+      - name: resolve pr refs
+        id: refs
+        uses: eficode/resolve-pr-refs@main
+        with:
+          token: ${{ secrets.BAAS_BOT_PAT }}
       - name: Check Comment for Action
-        if: github.event.comment.body == 'auto_merge'
         uses: everlytic/branch-merge@1.1.2
         with:
           github_token: ${{ secrets.BAAS_BOT_PAT }}
-          source_ref: 'comment-test'
-          target_branch: 'main'
+          source_ref: ${{ steps.refs.outputs.head_ref }}
+          target_branch: ${{ steps.refs.outputs.base_ref }}
+          commit_message_template: '[Automated] Merged {source_ref} into target {target_branch}'
