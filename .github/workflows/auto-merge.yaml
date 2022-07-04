@@ -15,8 +15,5 @@ jobs:
     steps:
       - name: Check Comment for Action
         if: github.event.comment.body == 'auto_merge'
-        uses: everlytic/branch-merge@1.1.2
-        with:
-          github_token: ${{ secrets.BAAS_BOT_PAT }}
-          source_ref: 'comment-test'
-          target_branch: 'main'
+        run: echo "Deploying to production server on branch $GITHUB_REF"
+        
