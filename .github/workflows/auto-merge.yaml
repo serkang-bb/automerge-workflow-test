@@ -20,5 +20,6 @@ jobs:
         uses: devmasx/merge-branch@master
         with:
           type: now
+          from_branch: comment-test
           target_branch: main
           github_token: ${{ secrets.BAAS_BOT_PAT }}
