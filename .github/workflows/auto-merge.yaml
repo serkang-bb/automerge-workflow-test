@@ -13,7 +13,6 @@ jobs:
     if: ${{ github.event.issue.pull_request && github.event.comment.body == 'auto_merge' }}
     runs-on: ubuntu-latest
     steps:
-    steps:
       - id: 'get-branch'
         run: echo ::set-output name=branch::$(gh pr view $PR_NO --repo $REPO --json headRefName --jq '.headRefName')
         env:
