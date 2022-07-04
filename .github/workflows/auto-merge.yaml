@@ -15,4 +15,4 @@ jobs:
     steps:
       - name: Check Comment for Action
         if: github.event.comment.body == 'auto_merge'
-        run : echo running on branch ${GITHUB_REF##*/} ${GITHUB_REF}
+        run : echo running on branch ${GITHUB_REF_NAME}
