@@ -10,7 +10,7 @@ on:
 jobs:
   pr_commented:
     name: PR comment
-    if: ${{ github.event.issue.pull_request }}
+    if: ${{ github.event.issue.pull_request && github.event.comment.body == 'auto_merge' }}
     runs-on: ubuntu-latest
     steps:
       - name: resolve pr refs
@@ -19,5 +19,4 @@ jobs:
         with:
           token: ${{ secrets.BAAS_BOT_PAT }}
       - name: Check Comment for Action
-        if: github.event.comment.body == 'auto_merge'
         run : echo 'Branch Name - ${{ steps.refs.outputs.head_ref }} - ${{ steps.refs.outputs.base_ref }}'
