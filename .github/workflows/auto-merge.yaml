@@ -16,11 +16,11 @@ jobs:
       - id: 'get-branch'
         run: |
           echo ::set-output name=branch::$(gh pr view $PR_NO --repo $REPO --json headRefName --jq '.headRefName')
-          echo ::set-output name=target-branch::$(gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name')
+          echo ::set-output name=target-branch::$(gh repo view --json defaultBranchRef --jq .defaultBranchRef.name)
         env:
           REPO: ${{ github.repository }}
           PR_NO: ${{ github.event.issue.number }}
           GITHUB_TOKEN: ${{ secrets.BAAS_BOT_PAT }}
 
       - name: Checkout
-        run : echo ${{ steps.get-branch.outputs.branch }} - ${BRANCH_NAME}
+        run : echo ${{ steps.get-branch.outputs.branch }} - ${{ steps.get-branch.outputs.target-branch }}
