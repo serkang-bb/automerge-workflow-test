@@ -20,4 +20,4 @@ jobs:
           token: ${{ secrets.BAAS_BOT_PAT }}
       - name: Check Comment for Action
         if: github.event.comment.body == 'auto_merge'
-        run : echo 'Branch Name - ${{ steps.refs.outputs.head_ref }}'
+        run : echo 'Branch Name - ${{ steps.refs.outputs.head_ref } - ${{ steps.refs.outputs.base_ref }}'
