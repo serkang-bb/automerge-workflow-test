@@ -15,7 +15,6 @@ jobs:
     steps:
       - id: 'get-branch'
         run: |
-          echo ::set-output name=branch::$(gh pr view $PR_NO --repo $REPO --json headRefName --jq '.headRefName')
           echo ::set-output name=target-branch::$(gh repo view --json defaultBranchRef --jq .defaultBranchRef.name)
         env:
           REPO: ${{ github.repository }}
