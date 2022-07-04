@@ -15,5 +15,5 @@ jobs:
     steps:
       - name: Check Comment for Action
         if: github.event.comment.body == 'auto_merge'
-        run: echo "Deploying to production server on branch ${{ GITHUB_HEAD_REF }}"
+        run: echo "Deploying to production server on branch $GITHUB_HEAD_REF"
         
