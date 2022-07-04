@@ -3,7 +3,7 @@ name: PR Comment for Auto Merge
 on:
   issue_comment:
     branches:
-      - main
+      - 'release/*'
     paths-ignore:
       - '.github/**'
 
@@ -13,6 +13,12 @@ jobs:
     if: ${{ github.event.issue.pull_request }}
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@master
+
       - name: Check Comment for Action
         if: github.event.comment.body == 'auto_merge'
-        run : echo running on branch ${GITHUB_REF##*/}
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          target_branch: main
+          github_token: ${{ secrets.BAAS_BOT_PAT }}
