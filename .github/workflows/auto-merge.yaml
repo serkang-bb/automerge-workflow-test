@@ -13,7 +13,6 @@ jobs:
     if: ${{ github.event.issue.pull_request }}
     runs-on: ubuntu-latest
     steps:
-      - name: Check Comment for Action
         if: github.event.comment.body == 'auto_merge'
         - uses: actions/checkout@v2
         - uses: everlytic/branch-merge@1.1.2
