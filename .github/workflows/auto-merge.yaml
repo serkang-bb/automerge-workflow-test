@@ -15,5 +15,5 @@ jobs:
     steps:
       - name: Check Comment for Action
         if: github.event.comment.body == 'auto_merge'
-        - uses: actions/checkout@v2
-        - run : echo ${{ github.ref }}
+        uses: actions/checkout@v2
+        run : echo ${{ github.ref }}
