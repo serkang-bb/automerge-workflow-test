@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: 'get-branch'
-        run: echo ::set-output name=branch::$(gh pr view $PR_NO --repo $REPO --json headRefName --jq '.headRefName')
+        run: echo ::set-output name=branch::$(gh repo view --json defaultBranchRef --jq .defaultBranchRef.name)
         env:
           REPO: ${{ github.repository }}
           PR_NO: ${{ github.event.issue.number }}
