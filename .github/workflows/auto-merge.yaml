@@ -21,9 +21,15 @@ jobs:
           PR_NO: ${{ github.event.issue.number }}
           GITHUB_TOKEN: ${{ secrets.BAAS_BOT_PAT }}
       - name: Merge PR
-        uses: everlytic/branch-merge@1.1.2
+        uses: plm9606/automerge_actions@1.2.2
         with:
-          github_token: ${{ secrets.BAAS_BOT_PAT }}
-          source_ref: ${{ steps.get-branch.outputs.branch }}
-          target_branch: ${{ github.event.repository.default_branch }}
-          commit_message_template: '[Automated] Merged {source_ref} into target {target_branch}'
+          # The label name to automatically merge. Default is "automerge".
+          label-name: ''
+          # The number of reviewers to automatically merge. Default is 1.
+          reviewers-number:
+          # The merge method ("merge", "squash", "rebase"). Default is "merge"
+          merge-method:
+          # Let the bot delete the merged branch. true or false.
+          auto-delete:
+          # GitHub WebHook Secret Token
+          github-token: ${{ secrets.GITHUB_TOKEN }}
