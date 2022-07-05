@@ -21,4 +21,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.BAAS_BOT_PAT }}
 
       - name: Checkout
-        run : echo {{ github.head_ref }}
+        run : echo ${{ github.head_ref }}
