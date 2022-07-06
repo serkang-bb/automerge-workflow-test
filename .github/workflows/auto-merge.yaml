@@ -21,10 +21,9 @@ jobs:
           PR_NO: ${{ github.event.issue.number }}
           GITHUB_TOKEN: ${{ secrets.BAAS_BOT_PAT }}
       - name: Merge PR
-        uses: davideviolante/pr-automerge-action@v1.2.2
-        env:
-          GITHUB_TOKEN: ${{ secrets.BAAS_BOT_PAT }}
+        uses: devmasx/merge-branch@master
         with:
-          merge-method: 'merge' # Default 'squash'
-          min-approvals: 2 # Default 2
-          base-ref: ${{ github.event.repository.default_branch }}
+          type: now
+          target_branch: ${{ github.event.repository.default_branch }}
+          github_token: ${{ github.BAAS_BOT_PAT }}
+          
