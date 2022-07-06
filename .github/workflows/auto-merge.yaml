@@ -26,5 +26,5 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.BAAS_BOT_PAT }}"
           MERGE_LABELS: ""
-          MERGE_REQUIRED_APPROVALS: "1"
+          MERGE_REQUIRED_APPROVALS: "0"
           PULL_REQUEST: ${{ github.event.issue.number }}
