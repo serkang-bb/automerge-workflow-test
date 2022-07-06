@@ -12,13 +12,13 @@ on:
 jobs:
   pr_commented:
     name: Auto Merge Comment
-    if: github.event.issue.pull_request && github.event.comment.body == 'auto_merge' && github.event.review.state == 'approved'
+    if: github.event.issue.pull_request && github.event.comment.body == 'auto_merge'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
       - name: automerge
         id: automerge
-        uses: "pascalgn/automerge-action@v0.15.3"
+        uses: "pascalgn/automerge-action@2e9644b0b86a2c052525921f181f905dc8102da5"
         env:
           GITHUB_TOKEN: "${{ secrets.BAAS_BOT_PAT }}"
           MERGE_LABELS: ""
