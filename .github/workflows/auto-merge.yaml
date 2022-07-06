@@ -22,7 +22,6 @@ jobs:
           PR_NO: ${{ github.event.issue.number }}
           GITHUB_TOKEN: ${{ secrets.BAAS_BOT_PAT }}
       - name: Merge PR
-        run: echo ${{ github.event.pull_request.number }}
         uses: "pascalgn/automerge-action@v0.15.3"
         env:
           GITHUB_TOKEN: "${{ secrets.BAAS_BOT_PAT }}"
