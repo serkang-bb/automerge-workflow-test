@@ -12,7 +12,7 @@ on:
 jobs:
   pr_commented:
     name: Auto Merge Comment
-    if: github.event.issue.pull_request && github.event.comment.body == 'auto_merge'
+    if: github.event.issue.pull_request && github.event.comment.body == 'auto_merge' && github.event.review.state == 'approved'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
@@ -22,7 +22,7 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.BAAS_BOT_PAT }}"
           MERGE_LABELS: ""
-          MERGE_REQUIRED_APPROVALS: "0"
+          MERGE_REQUIRED_APPROVALS: "1"
           PULL_REQUEST: ${{ github.event.issue.number }}
       - name: feedback
         if: steps.automerge.outputs.mergeResult == 'merged'
