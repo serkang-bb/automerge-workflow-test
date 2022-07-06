@@ -12,7 +12,7 @@ on:
 jobs:
   pr_commented:
     name: Auto Merge Comment
-    if: ${{ github.event.issue.pull_request && github.event.comment.body == 'auto_merge' }}
+    if: github.event.issue.pull_request && github.event.comment.body == 'auto_merge'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
