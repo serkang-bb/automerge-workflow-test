@@ -2,22 +2,29 @@ name: PR Comment for Auto Merge
 
 on:
   issue_comment:
+    types:
+      - created
     branches:
-      - 'release/*'
+      - 'main'
     paths-ignore:
       - '.github/**'
 
 jobs:
   pr_commented:
-    name: PR comment
+    name: Auto Merge Comment
     if: ${{ github.event.issue.pull_request && github.event.comment.body == 'auto_merge' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
-      - name: Merge PR
+      - name: automerge
+        id: automerge
         uses: "pascalgn/automerge-action@v0.15.3"
         env:
           GITHUB_TOKEN: "${{ secrets.BAAS_BOT_PAT }}"
           MERGE_LABELS: ""
           MERGE_REQUIRED_APPROVALS: "1"
           PULL_REQUEST: ${{ github.event.issue.number }}
+      - name: feedback
+        if: steps.automerge.outputs.mergeResult == "merged"
+        run: |
+          echo "Pull request ${{ steps.automerge.outputs.pullRequestNumber }} merged!"
