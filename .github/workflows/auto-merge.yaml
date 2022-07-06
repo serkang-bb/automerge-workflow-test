@@ -24,4 +24,4 @@ jobs:
       - name: Merge PR
         uses: ridedott/merge-me-action@v2
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.BAAS_BOT_PAT }}
