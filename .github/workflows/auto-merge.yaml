@@ -27,4 +27,4 @@ jobs:
         with:
           merge-method: 'merge' # Default 'squash'
           min-approvals: 2 # Default 2
-          base-ref: ${{ steps.get-branch.outputs.branch }}
+          base-ref: ${{ github.event.repository.default_branch }}
