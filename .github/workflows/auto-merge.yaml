@@ -16,15 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
-      - name: automerge
-        id: automerge
-        uses: "pascalgn/automerge-action@2e9644b0b86a2c052525921f181f905dc8102da5"
-        env:
-          GITHUB_TOKEN: "${{ secrets.BAAS_BOT_PAT }}"
-          MERGE_LABELS: ""
-          MERGE_REQUIRED_APPROVALS: "1"
-          PULL_REQUEST: ${{ github.event.issue.number }}
-      - name: feedback
-        if: steps.automerge.outputs.mergeResult == 'merged'
+        shell: bash
         run: |
-          echo "Pull request ${{ steps.automerge.outputs.pullRequestNumber }} merged!"
+          gh api "/repos/{owner}/{repo}/statuses/${{ steps.getsha.outputs.head_sha }}" \
+            -f context="all_plans_complete" \
+            -f description="All are successful" \
+            -f state="success"
