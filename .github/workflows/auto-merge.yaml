@@ -21,11 +21,11 @@ jobs:
           PR_NO: ${{ github.event.issue.number }}
           GITHUB_TOKEN: ${{ secrets.BAAS_BOT_PAT }}
       - name: Merge PR
-        uses: mtanzi/action-automerge@v1
-        id: merge
-        with:
-          github_token: ${{ secrets.BAAS_BOT_PAT }}
-          source: ${{ steps.get-branch.outputs.branch }}
-          target: ${{ github.event.repository.default_branch }}
-          webhook_url: #if present add the Slack webhook
+    - uses: davideviolante/pr-automerge-action@v1.2.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        merge-method: 'merge' # Default 'squash'
+        min-approvals: 2 # Default 2
+        base-ref: ${{ steps.get-branch.outputs.branch }}
           
