@@ -22,4 +22,4 @@ jobs:
           PR_NO: ${{ github.event.issue.number }}
           GITHUB_TOKEN: ${{ secrets.BAAS_BOT_PAT }}
       - name: Merge PR
-        run: echo ${{ github.event.pull_request.number }}
+        run: echo ${{ github.event.number }}
