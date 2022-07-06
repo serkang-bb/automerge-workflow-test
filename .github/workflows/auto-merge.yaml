@@ -23,3 +23,5 @@ jobs:
             -f context="all_plans_complete" \
             -f description="All are successful" \
             -f state="success"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
