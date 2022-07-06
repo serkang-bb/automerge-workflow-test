@@ -24,6 +24,7 @@ jobs:
         uses: devmasx/merge-branch@master
         with:
           type: now
+          from_branch: ${{ steps.get-branch.outputs.branch }}
           target_branch: ${{ github.event.repository.default_branch }}
           github_token: ${{ github.BAAS_BOT_PAT }}
           
