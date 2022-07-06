@@ -25,6 +25,6 @@ jobs:
           MERGE_REQUIRED_APPROVALS: "1"
           PULL_REQUEST: ${{ github.event.issue.number }}
       - name: feedback
-        if: steps.automerge.outputs.mergeResult == "merged"
+        if: steps.automerge.outputs.mergeResult == 'merged'
         run: |
           echo "Pull request ${{ steps.automerge.outputs.pullRequestNumber }} merged!"
