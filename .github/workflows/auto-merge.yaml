@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
-      - name: "auto_complete_all_checks"
+      - name: "all_plan_complete"
         shell: bash
         run: |
           gh api "/repos/{owner}/{repo}/statuses/${{ steps.getsha.outputs.head_sha }}" \
