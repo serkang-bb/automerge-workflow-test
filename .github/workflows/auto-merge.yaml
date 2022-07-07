@@ -17,4 +17,4 @@ jobs:
     steps:
       - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
       - name: "all_plans_complete"
-      - run: echo A comment on issue ${{ github.event.issue.number }}   
+        run: echo A comment on issue ${{ github.event.issue.number }}   
