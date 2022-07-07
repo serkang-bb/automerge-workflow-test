@@ -1,4 +1,4 @@
-name: PR Comment for Auto Merge
+name: PR Comment for All Plans Complete
 
 on:
   issue_comment:
@@ -12,16 +12,9 @@ on:
 jobs:
   pr_commented:
     name: Auto Merge Comment
-    if: github.event.issue.pull_request && github.event.comment.body == 'auto_merge'
+    if: github.event.issue.pull_request && github.event.comment.body == 'all_plans_complete'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
-      - name: "all_plan_complete"
-        shell: bash
-        run: |
-          gh api "/repos/{owner}/{repo}/statuses/${{ steps.getsha.outputs.head_sha }}" \
-            -f context="all_plans_complete" \
-            -f description="All are successful" \
-            -f state="success"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+      - name: "all_plans_complete"
+      - run: echo A comment on issue ${{ github.event.issue.number }}   
