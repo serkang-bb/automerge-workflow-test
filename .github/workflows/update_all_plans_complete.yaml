@@ -17,26 +17,13 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
-      - name: Get sha
-        id: getsha
-        run: |
-          echo "::set-output name=head_sha::$(gh api /repos/{owner}/{repo}/pulls/${{ github.event.issue.number }} |jq -r '.head.sha')"      
+      - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579     
       - name: update_all_plans_complete
         shell: bash
         run: |
-          if [ "${{ github.event.review.state }}" == 'approved' ]
-          then
-            gh api "/repos/{owner}/{repo}/statuses/${{ steps.getsha.outputs.head_sha }}" \
-              -f context="all_plans_complete" \
-              -f description="All are successful" \
-              -f state="success"
-          else
-            echo "The PR must be approved first !!"
-            echo ${{ steps.getsha.outputs.head_sha }}
-            gh api "/repos/{owner}/{repo}/statuses/${{ steps.getsha.outputs.head_sha }}" \
-              -f context="Auto Merge Comment" \
-              -f description="All are successful" \
-              -f state="success"
-            exit 1
-          fi
+          head_sha=$(gh api /repos/{owner}/{repo}/pulls/${{ github.event.inputs.pr }} |jq -r '.head.sha')
+          # echo ${head_sha}
+          # gh api "/repos/{owner}/{repo}/statuses/${head_sha}" \
+          #  -f context="Auto Merge Comment" \
+          #  -f description="All are successful" \
+          #  -f state="success"
