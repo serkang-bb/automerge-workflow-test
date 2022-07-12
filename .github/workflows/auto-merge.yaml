@@ -1,30 +1,16 @@
-name: PR Comment for Auto Merge
+name: All Plans Complete on Comment
 
 on:
-  issue_comment:
+  pull_request:
     branches:
-      - 'release/*'
+      - 'main'
     paths-ignore:
       - '.github/**'
 
 jobs:
-  pr_commented:
-    name: PR comment
-    if: ${{ github.event.issue.pull_request && github.event.comment.body == 'auto_merge' }}
+  pr_all_plans_complete:
+    name: Auto Merge Comment
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
-      - name: Get source branch
-        id: get-branch
-        run: echo ::set-output name=branch::$(gh pr view $PR_NO --repo $REPO --json headRefName --jq '.headRefName')
-        env:
-          REPO: ${{ github.repository }}
-          PR_NO: ${{ github.event.issue.number }}
-          GITHUB_TOKEN: ${{ secrets.BAAS_BOT_PAT }}
-      - name: Merge PR
-        uses: "pascalgn/automerge-action@v0.15.3"
-        env:
-          GITHUB_TOKEN: "${{ secrets.BAAS_BOT_PAT }}"
-          MERGE_LABELS: ""
-          MERGE_REQUIRED_APPROVALS: "0"
-          PULL_REQUEST: ${{ github.event.issue.number }}
+      - name: "all_plans_complete"
+        run: exit 1   

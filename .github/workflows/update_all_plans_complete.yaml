@@ -1,0 +1,29 @@
+name: Update All Plans Complete on Comment
+
+on:
+  issue_comment:
+    types:
+      - created
+    branches:
+      - 'main'
+    paths-ignore:
+      - '.github/**'
+
+jobs:
+  pr_commented:
+    name: Update All Plans Complete
+    if: github.event.issue.pull_request && contains(github.event.comment.body, 'update_all_plans_complete')
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579     
+      - name: update_all_plans_complete
+        shell: bash
+        run: |
+          head_sha=$(gh api /repos/{owner}/{repo}/pulls/${{ github.event.issue.number }} |jq -r '.head.sha')
+          echo ${head_sha}
+          # gh api "/repos/{owner}/{repo}/statuses/${head_sha}" \
+          #  -f context="Auto Merge Comment" \
+          #  -f description="All are successful" \
+          #  -f state="success"
