@@ -16,6 +16,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
+      - name: Get sha
+        id: getsha
+        run: |
+          echo "::set-output name=head_sha::$(gh api /repos/{owner}/{repo}/pulls/${{ github.event.inputs.pr }} |jq -r '.head.sha')"      
       - name: update_all_plans_complete
         shell: bash
         run: |
