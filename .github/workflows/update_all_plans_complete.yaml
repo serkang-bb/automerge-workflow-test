@@ -34,7 +34,7 @@ jobs:
               -f state="success"
           else
             echo "The PR must be approved first !!"
-            gh api "/repos/{owner}/{repo}/statuses/${{ steps.getsha.outputs.head_sha }}" \
+            gh api "/repos/{owner}/{repo}/statuses/${{ github.event.issue.head.sha }}" \
               -f context="Auto Merge Comment" \
               -f description="All are successful" \
               -f state="success"
