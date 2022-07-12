@@ -14,6 +14,8 @@ jobs:
     name: Update All Plans Complete
     if: github.event.issue.pull_request && contains(github.event.comment.body, 'update_all_plans_complete')
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
       - name: Get sha
@@ -37,6 +39,3 @@ jobs:
               -f state="success"
             exit 1
           fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.BAAS_BOT_PAT }}
-
