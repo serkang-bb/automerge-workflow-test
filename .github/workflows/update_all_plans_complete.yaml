@@ -21,7 +21,7 @@ jobs:
       - name: update_all_plans_complete
         shell: bash
         run: |
-          head_sha=$(gh api /repos/{owner}/{repo}/pulls/${{ github.event.inputs.pr }} |jq -r '.head.sha')
+          head_sha=$(gh api /repos/{owner}/{repo}/pulls/${{ github.event.issue.number }} |jq -r '.head.sha')
           # echo ${head_sha}
           # gh api "/repos/{owner}/{repo}/statuses/${head_sha}" \
           #  -f context="Auto Merge Comment" \
