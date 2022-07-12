@@ -21,7 +21,7 @@ jobs:
       - name: Get sha
         id: getsha
         run: |
-          echo ${{ github.event.inputs.pr }}
+          echo ${{ github.event.pull_request.head.sha }}
           echo "::set-output name=head_sha::$(gh api /repos/{owner}/{repo}/pulls/${{ github.event.inputs.pr }} |jq -r '.head.sha')"      
       - name: update_all_plans_complete
         shell: bash
