@@ -9,7 +9,7 @@ on:
 
 jobs:
   pr_all_plans_complete:
-    name: All Plans Complete
+    name: Auto Merge Comment
     runs-on: ubuntu-latest
     steps:
       - name: "all_plans_complete"
