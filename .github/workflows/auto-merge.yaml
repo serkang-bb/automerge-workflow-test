@@ -1,20 +1,16 @@
-name: PR Comment for All Plans Complete
+name: All Plans Complete on Comment
 
 on:
-  issue_comment:
-    types:
-      - created
+  pull_request:
     branches:
       - 'main'
     paths-ignore:
       - '.github/**'
 
 jobs:
-  pr_commented:
-    name: Auto Merge Comment
-    if: github.event.issue.pull_request && github.event.comment.body == 'all_plans_complete'
+  pr_all_plans_complete:
+    name: All Plans Complete
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
       - name: "all_plans_complete"
-        run: echo A comment on issue ${{ github.event.issue.number }}   
+        run: exit 1   
