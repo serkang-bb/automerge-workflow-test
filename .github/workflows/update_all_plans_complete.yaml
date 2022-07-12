@@ -22,7 +22,7 @@ jobs:
         shell: bash
         run: |
           head_sha=$(gh api /repos/{owner}/{repo}/pulls/${{ github.event.issue.number }} |jq -r '.head.sha')
-          # echo ${head_sha}
+          echo ${head_sha}
           # gh api "/repos/{owner}/{repo}/statuses/${head_sha}" \
           #  -f context="Auto Merge Comment" \
           #  -f description="All are successful" \
