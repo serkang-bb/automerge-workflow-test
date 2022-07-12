@@ -21,8 +21,7 @@ jobs:
       - name: Get sha
         id: getsha
         run: |
-          echo ${{ github.event.pull_request.head.sha }}
-          echo "::set-output name=head_sha::$(gh api /repos/{owner}/{repo}/pulls/${{ github.event.inputs.pr }} |jq -r '.head.sha')"      
+          echo "::set-output name=head_sha::$(gh api /repos/{owner}/{repo}/pulls/${{ github.event.issue.number }} |jq -r '.head.sha')"      
       - name: update_all_plans_complete
         shell: bash
         run: |
@@ -34,7 +33,8 @@ jobs:
               -f state="success"
           else
             echo "The PR must be approved first !!"
-            gh api "/repos/{owner}/{repo}/statuses/393e0dae8576ce7a6f0229440b40e82960dd55b6" \
+            echo ${{ steps.getsha.outputs.head_sha }}
+            gh api "/repos/{owner}/{repo}/statuses/${{ steps.getsha.outputs.head_sha }}" \
               -f context="Auto Merge Comment" \
               -f description="All are successful" \
               -f state="success"
